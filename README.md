@@ -1,4 +1,6 @@
 # Sensitivity analysis of the Hannay model 
+by Caleb Mayer, Olivia Walch, Daniel B. Forger, and Kevin Hannay
+
 This code is used to generate the results and figures in "Impact of light schedules and model parameters on the circadian outcomes of individuals" by Caleb Mayer, Olivia Walch, Daniel B. Forger, and Kevin Hannay. We examine interactions between the parameters in the Hannay model and different lightning schedules. 
 
 The code used to generate the main text figures are in Jupyter notebooks (.ipynb), with a different notebook for every main text figure. Additionally, we include a notebook to run all of the main text figures at once. Helper functions and modules are included in .py files.  
