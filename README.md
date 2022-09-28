@@ -1,5 +1,5 @@
 # Sensitivity analysis of the Hannay model 
-by Caleb Mayer, Olivia Walch, Daniel B. Forger, and Kevin Hannay
+by Caleb Mayer, Olivia Walch, Daniel B. Forger, and Kevin Hannay.
 
 This code is used to generate the results and figures in "Impact of light schedules and model parameters on the circadian outcomes of individuals" by Caleb Mayer, Olivia Walch, Daniel B. Forger, and Kevin Hannay. We examine interactions between the parameters in the Hannay model and different lightning schedules. 
 
