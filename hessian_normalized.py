@@ -21,7 +21,7 @@ class HessianCircadian:
 
     def hessian(self, u0: jnp.ndarray = jnp.array([0.70,0.0,0.0]), light: jnp.ndarray = jnp.zeros(240*7)):
         params = self.get_parameters_array()
-        statefinal = self.step_all_n(u0, light, params, 0.10) # so this is variable value after simulate model with all of light
+        statefinal = self.step_all_n(u0, light, params, 0.10) 
         def loss(params): 
             states_params = HessianCircadian.step_all_n(u0, light, params, 0.10)
             x1 = states_params[:,0] * jnp.cos(states_params[:,1])
@@ -29,8 +29,6 @@ class HessianCircadian:
             x2 = statefinal[:,0] * jnp.cos(statefinal[:,1])
             y2 = statefinal[:,0] * jnp.sin(statefinal[:,1])
             return jnp.mean((x1 - x2) ** 2 + (y1 - y2) ** 2)
-            #return jnp.mean(jnp.abs(states_params[:,0]*jnp.cos(states_params[:,1]) - statefinal[:,0]*jnp.cos(statefinal[:,1])))
-        #HessianCircadian.norm(HessianCircadian.step_all_n(u0, light, params, 0.10), statefinal) 
         H = jacfwd(jacrev(loss)) # hessian matrix, derivatives wrt parameters 
         return H(params)
     def jacobian(self, u0: jnp.ndarray = jnp.array([0.70,0.0,0.0]), light: jnp.ndarray = jnp.zeros(240*7)):
@@ -50,9 +48,7 @@ class HessianCircadian:
             y1 = states_params[:,0] * jnp.sin(states_params[:,1])
             x2 = statefinal[:,0] * jnp.cos(statefinal[:,1])
             y2 = statefinal[:,0] * jnp.sin(statefinal[:,1])
-            return jnp.mean((x1 - x2) ** 2 + (y1 - y2) ** 2)
-            #return jnp.mean(jnp.abs(states_params[:,0]*jnp.cos(states_params[:,1]) - statefinal[:,0]*jnp.cos(statefinal[:,1])))
-        #HessianCircadian.norm(HessianCircadian.step_all_n(u0, light, params, 0.10), statefinal) 
+            return jnp.mean((x1 - x2) ** 2 + (y1 - y2) ** 2) 
         H = jacfwd(jacrev(loss)) # hessian matrix, derivatives wrt parameters 
         lam_default = jnp.ones(len_param)#lam_default = 1.0
         return H(lam_default)
@@ -64,12 +60,6 @@ class HessianCircadian:
             states_all_params = HessianCircadian.step_all_n(u0, light, params, 0.10)
             rcos_psi = states_all_params[:,0]*jnp.cos(states_all_params[:,1])
             return jnp.mean(states_all_params[:,0]) #rcos_psi[-1] # last value 
-#         def loss1(params):
-#             return HessianCircadian.step_all_n(u0, light, params, 0.10)[-1,0]
-#         def loss2(params):
-#             return HessianCircadian.step_all_n(u0, light, params, 0.10)[-1,1]
-#        du1_dp_val = jacfwd(loss1)
-#        du2_dp_val = jacfwd(loss2)
         du_dp_val = jacfwd(loss)
         scaled_sensitivity_ind1 = (params/jnp.mean(states_normal[:,0]))*du_dp_val(params)
         return scaled_sensitivity_ind1 #, du2_dp_val
@@ -115,7 +105,7 @@ class HessianCircadian:
 
         R, Psi, n = u
 
-        tau, K, gamma, Beta1, A1, A2, BetaL1, BetaL2, sigma, G, alpha_0, delta, I0, p = params
+        tau, K, gamma, Beta1, A1, A2, BetaL1, BetaL2, sigma, G, alpha_0, delta, p, I0 = params
             
 
         alpha_0_func = alpha_0 * pow(light, p) / (pow(light, p) + I0)
@@ -564,7 +554,7 @@ class HessianCircadianNewParams: # excluding K and gamma
 
         R, Psi, n = u
 
-        tau, Beta1, A1, A2, BetaL1, BetaL2, sigma, G, alpha_0, delta, I0, p = params
+        tau, Beta1, A1, A2, BetaL1, BetaL2, sigma, G, alpha_0, delta, p, I0 = params
         K =  0.06358
         gamma = 0.024 
             
