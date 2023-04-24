@@ -19,7 +19,7 @@ clean_figure2.ipynb: this notebook generates a first hessian-based sensitivity f
 
 clean_figure3.ipynb: this notebook looks at model output changes from one-at-a-time parameter perturbations. Performing this analysis entails visualizing model output changes for different light schedules when each parameter is perturbed in turn.
 
-clean_figure4.ipynb: this notebook examines the application of the hessian-based sensitivity metric to real light schedules. To generate this figure, we compare the overall and individual sensitivity metrics from example real data schedules with those from the in-silico light schedules we previously study.
+clean_figure4.ipynb: this notebook examines the application of the hessian-based sensitivity metric to different light levels. To generate this figure, we compare the overall and individual sensitivity metrics from lower light levels ranging from 0 to 950 lux for the six schedules of interest. 
 
 clean_figure5.ipynb: this notebook performs a parameter recovery analysis. This consists of determining the extent to which the actual value of parameters can be recovered given a noisy light schedule. 
 
